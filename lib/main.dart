@@ -1,3 +1,4 @@
+import 'package:dreamoj/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,6 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: '/',
     );
   }
 }
