@@ -30,7 +30,11 @@ class TopBar extends StatelessWidget {
                 SizedBox(
                   width: 16,
                 ),
-                //image
+                Consumer<SeverAddress>(
+                  builder: ((context, value, child) {
+                    return Image.network("${value.addr}/images/OJ.png");
+                  }),
+                ),
                 SizedBox(
                   width: 16,
                 ),
