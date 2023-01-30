@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (context) => SeverAddress()),
         ChangeNotifierProvider(create: (context) => CurrPage()),
+        ChangeNotifierProvider(create: (context) => User()),
       ],
       builder: (context, child) {
         return MaterialApp(

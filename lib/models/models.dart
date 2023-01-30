@@ -34,3 +34,18 @@ class CurrPage with ChangeNotifier {
 class SeverAddress {
   final String addr = "http://localhost:5000";
 }
+
+class User with ChangeNotifier {
+  int? id;
+  String? username;
+  String? password;
+  bool is_login = false;
+
+  void login(int _id, String _username, String _password) {
+    id = _id;
+    username = _username;
+    password = _password;
+    is_login = true;
+    notifyListeners();
+  }
+}
