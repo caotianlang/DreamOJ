@@ -68,6 +68,57 @@ class TopBar extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
+                Consumer<User>(
+                  builder: (context, value, child) {
+                    return value.is_login
+                        ? Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Container(
+                              padding: EdgeInsets.all(8.0),
+                              alignment: Alignment.centerLeft,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(8, 0, 0, 0),
+                              ),
+                              child: Text("User"),
+                            ),
+                          )
+                        : Row(
+                            children: [
+                              TopBarItem(
+                                id: 5,
+                                uri: '/login',
+                                text: "登录",
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Consumer<CurrPage>(
+                                  builder: (context, value, child) {
+                                return ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Color.fromARGB(150, 255, 235, 59)),
+                                    shadowColor: MaterialStateProperty.all(
+                                        Color.fromARGB(0, 0, 0, 0)),
+                                    foregroundColor:
+                                        MaterialStateProperty.all(Colors.black),
+                                    shape: MaterialStateProperty.all(
+                                        StadiumBorder(
+                                            side: BorderSide(
+                                                style: BorderStyle.none))),
+                                  ),
+                                  onPressed: () {
+                                    value.changePage(-1);
+                                    Navigator.pushNamed(context, '/signup');
+                                  },
+                                  child: Text("注册"),
+                                );
+                              }),
+                            ],
+                          );
+                  },
+                ),
                 SizedBox(
                   width: 16,
                 ),
