@@ -1,3 +1,4 @@
+import 'package:dreamoj/pages/unknown.dart';
 import 'package:flutter/material.dart';
 
 Route onGenerateRoute(RouteSettings settings) {
@@ -17,6 +18,7 @@ Route onGenerateRoute(RouteSettings settings) {
     case '/store':
       return MaterialPageRoute(builder: (_) => Container(), settings: settings);
     default:
-      return MaterialPageRoute(builder: (_) => Container(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => UnknownPage(), settings: settings);
   }
 }
