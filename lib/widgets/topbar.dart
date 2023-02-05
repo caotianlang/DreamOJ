@@ -69,18 +69,15 @@ class TopBar extends StatelessWidget {
                 ),
                 Spacer(),
                 Consumer<User>(
-                  builder: (context, value, child) {
-                    return value.is_login
+                  builder: (context, user, child) {
+                    return user.is_login
                         ? Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Container(
                               padding: EdgeInsets.all(8.0),
                               alignment: Alignment.centerLeft,
                               width: 100,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(8, 0, 0, 0),
-                              ),
-                              child: Text("User"),
+                              child: Text(user.username!),
                             ),
                           )
                         : Row(

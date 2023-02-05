@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:dreamoj/models/models.dart';
 import 'package:dreamoj/widgets/ccard.dart';
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<User>(
-      builder: (context, value, child) {
+      builder: (context, user, child) {
         return basicCPage(
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -93,7 +94,6 @@ class LoginPage extends StatelessWidget {
                                   obscureText: value.isObuure,
                                   onChanged: (value) {
                                     password = value;
-                                    print('password change');
                                   },
                                 );
                               }),
@@ -123,20 +123,45 @@ class LoginPage extends StatelessWidget {
                                           StadiumBorder(
                                               side: BorderSide(
                                                   style: BorderStyle.none)))),
-                                  onPressed: () async {
-                                    var password_bytes = utf8.encode(password);
-                                    var password_md5 =
-                                        md5.convert(password_bytes).toString();
+                                  onPressed: () {
+                                    var passwordBytes = utf8.encode(password);
+                                    var passwordMD5 =
+                                        md5.convert(passwordBytes).toString();
 
-                                    await Dio().post(
+                                    Dio().post(
                                       '${value.addr}/login',
                                       data: {
                                         'username': username,
-                                        'password': password_md5,
+                                        'password': passwordMD5,
                                       },
-                                    );
-                                    print(username);
-                                    print(password_md5);
+                                    ).then((response) {
+                                      assert(
+                                          response.statusCode == HttpStatus.ok);
+                                      if (response.data['login'] == 'ok') {
+                                        user.login(username);
+                                        Navigator.pushNamed(context, '/');
+                                      } else if (response.data['login'] ==
+                                          'username') {
+                                        var snackBar = SnackBar(
+                                          content: SizedBox(
+                                            height: 30,
+                                            child: Center(child: Text('用户名错误')),
+                                          ),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      } else {
+                                        var snackBar = SnackBar(
+                                          content: SizedBox(
+                                            height: 30,
+                                            child:
+                                                Center(child: Text('用户名或密码错误')),
+                                          ),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      }
+                                    });
                                   },
                                   child: Text(
                                     '登录',

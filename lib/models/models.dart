@@ -36,15 +36,11 @@ class SeverAddress {
 }
 
 class User with ChangeNotifier {
-  int? id;
   String? username;
-  String? password;
   bool is_login = false;
 
-  void login(int _id, String _username, String _password) {
-    id = _id;
+  void login(String _username) {
     username = _username;
-    password = _password;
     is_login = true;
     notifyListeners();
   }
