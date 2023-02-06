@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:html';
+
 import 'package:dreamoj/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +70,48 @@ class TopBar extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
+                window.localStorage['username'] != null
+                    ? Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Container(
+                          padding: EdgeInsets.all(8.0),
+                          alignment: Alignment.centerLeft,
+                          width: 100,
+                          child:
+                              Text(window.localStorage['username'].toString()),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          TopBarItem(
+                            id: 5,
+                            uri: '/login',
+                            text: "登录",
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Consumer<CurrPage>(builder: (context, value, child) {
+                            return ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromARGB(150, 255, 235, 59)),
+                                shadowColor: MaterialStateProperty.all(
+                                    Color.fromARGB(0, 0, 0, 0)),
+                                foregroundColor:
+                                    MaterialStateProperty.all(Colors.black),
+                                shape: MaterialStateProperty.all(StadiumBorder(
+                                    side: BorderSide(style: BorderStyle.none))),
+                              ),
+                              onPressed: () {
+                                value.changePage(-1);
+                                Navigator.pushNamed(context, '/signup');
+                              },
+                              child: Text("注册"),
+                            );
+                          }),
+                        ],
+                      ),
                 SizedBox(
                   width: 16,
                 ),
