@@ -71,15 +71,10 @@ class TopBar extends StatelessWidget {
                 ),
                 Spacer(),
                 window.localStorage['username'] != null
-                    ? Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Container(
-                          padding: EdgeInsets.all(8.0),
-                          alignment: Alignment.centerLeft,
-                          width: 100,
-                          child:
-                              Text(window.localStorage['username'].toString()),
-                        ),
+                    ? TopBarItem(
+                        id: 6,
+                        uri: '/user',
+                        text: window.localStorage['username']!,
                       )
                     : Row(
                         children: [

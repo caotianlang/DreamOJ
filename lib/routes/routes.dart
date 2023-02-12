@@ -1,4 +1,5 @@
 import 'package:dreamoj/pages/login.dart';
+import 'package:dreamoj/pages/signup.dart';
 import 'package:dreamoj/pages/unknown.dart';
 import 'package:dreamoj/widgets/cpage.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ Route onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => LoginPage(), settings: settings);
     case '/signup':
       return MaterialPageRoute(
-          builder: (_) => cPage(mainWidget: Container()), settings: settings);
+          builder: (_) => SignupPage(), settings: settings);
     case '/problems':
       return MaterialPageRoute(
           builder: (_) => cPage(mainWidget: Container()), settings: settings);
